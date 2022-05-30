@@ -1,0 +1,6 @@
+opencv-python-headless==4.5.3.56
+seaborn
+fastapi==0.75.2
+uvicorn[standard]==0.16.0
+python-multipart
+psutil==5.9.1

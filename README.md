@@ -59,3 +59,28 @@ With this training, **mAP@0.5 achieved 71% accuracy** on validation set.
 ![alt text](https://github.com/KananVyas/person_car_detection_yolov5/blob/master/metrics/output.png?raw=true)
  
 
+## Docker support and API:
+
+Using `/api/main.py`:
+
+ - We can run inference using FastAPI endpoint.
+ - Execute `python3 /api/main.py` to run uvicorn server on port `7000`. It will automatically load the model and by calling `/predict` endpoint in Postman, we can get inference JSON as an output.
+ - To run in containarized env, build the `Dockerfile`
+ - - `docker build -f ./api/Dockerfile -t person_car_api  .`
+ - After succesfully building the docker,
+ - - `docker run -it  --net host  person_car_api`
+ - After running the container, call `http://127.0.0.1:7000/predict` POST request and send image as `file` form-data to the endpoint.
+ - The output json structure will look like:
+
+```json
+{"output":  [{
+	"xmin":  14.2618331909,
+	"ymin":  76.5265274048,
+	"xmax":  380.9652099609,
+	"ymax":  397.6776123047,
+	"confidence":  0.8891581893,
+	"class":  0,
+	"name":  "person"
+	}],
+"inference_time":  556.9939613342285 }
+```
